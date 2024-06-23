@@ -8,7 +8,7 @@ from io import BufferedReader
 from minio import Minio
 from minio.error import MinioException
 from settings import MINIO_ENDPOINT, MINIO_ACCESS_KEY, MINIO_SECRET_KEY, MINIO_BUCKET
-from utils.exceptions import PMSException
+from utils.exceptions import CSRException
 
 
 def minio_exception(func):
@@ -17,7 +17,7 @@ def minio_exception(func):
         try:
             return func(*args, **kwargs)
         except MinioException as e:
-            raise PMSException(500, f'[MinioClient:{func.__name__}] {e}')
+            raise CSRException(500, f'[MinioClient:{func.__name__}] {e}')
 
     return wrapper
 

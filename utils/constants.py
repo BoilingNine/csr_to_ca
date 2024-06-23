@@ -1,7 +1,7 @@
 from enum import Enum
 from types import DynamicClassAttribute
 
-DOCTOR_ROLE_KEY = "doctor"
+COMMON_ROLE_KEY = "common"
 
 USER_NAME_MIN = 1
 USER_NAME_MAX = 32

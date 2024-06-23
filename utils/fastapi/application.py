@@ -5,7 +5,7 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.security.utils import get_authorization_scheme_param
 from fastapi import status
 
-from utils.exceptions import PMSException
+from utils.exceptions import CSRException
 
 
 class CAFastAPI(FastAPI):
@@ -26,7 +26,7 @@ class CAFastAPI(FastAPI):
         return self.openapi_schema
 
 
-class CAHTTPBearer(HTTPBearer):
+class CSRHTTPBearer(HTTPBearer):
     """
     Override HTTPBearer to support custom message structure
     """
@@ -36,14 +36,14 @@ class CAHTTPBearer(HTTPBearer):
         scheme, credentials = get_authorization_scheme_param(authorization)
         if not (authorization and scheme and credentials):
             if self.auto_error:
-                raise PMSException(
+                raise CSRException(
                     code=status.HTTP_403_FORBIDDEN, msg="Not authenticated"
                 )
             else:
                 return None
         if scheme.lower() != "bearer":
             if self.auto_error:
-                raise PMSException(
+                raise CSRException(
                     code=status.HTTP_403_FORBIDDEN,
                     msg="Invalid authentication credentials",
                 )

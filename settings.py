@@ -23,9 +23,9 @@ LOG_DIAGNOSE = bool(os.getenv('LOG_DIAGNOSE'))
 # MYSQL
 DB_USER = os.getenv('DB_USER', 'root')
 DB_PASSWORD = os.getenv('DB_PASSWORD', '1qaz%40WSX%40BML')
-DB_NAME = os.getenv('DB_NAME', 'ca')
+DB_NAME = os.getenv('DB_NAME', 'csr')
 DB_HOST = os.getenv('DB_HOST', '127.0.0.1')
-DB_PORT = os.getenv('DB_PORT', '13306')
+DB_PORT = os.getenv('DB_PORT', '3306')
 
 # for jwt token
 JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', 'afccddcdd9bd42d6e1d8b6b698e7cb11488c6885463c0a917353af31e45c53fc')
@@ -42,6 +42,6 @@ DINGTALK_WEBHOOK_HEADERS = {
 
 # MINIO
 MINIO_ENDPOINT = os.getenv('MINIO_ENDPOINT', '127.0.0.1:9000')
-MINIO_ACCESS_KEY = os.getenv('MINIO_ACCESS_KEY', 'vBemlNtBC6dQxN64jIYD')
-MINIO_SECRET_KEY = os.getenv('MINIO_SECRET_KEY', 'p138PtZckI0sWQZoGctpzbFlydaNNYzAUGWMZCZI')
-MINIO_BUCKET = os.getenv('MINIO_BUCKET', 'pms-admin')
+MINIO_ACCESS_KEY = os.getenv('MINIO_ACCESS_KEY', 'CNRdPquVSikgmzvx3M72')
+MINIO_SECRET_KEY = os.getenv('MINIO_SECRET_KEY', '3wBNEKeUcMuJxocasoE0T73Dhn4EYLrlfbf0lbiL')
+MINIO_BUCKET = os.getenv('MINIO_BUCKET', 'csr')

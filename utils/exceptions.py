@@ -10,7 +10,7 @@ from utils.database import SessionLocal
 from utils.ret_code import (CODE_DESC)
 
 
-class PMSException(Exception):
+class CSRException(Exception):
     """
     Exception raised when an error occurs while processing PMS
     """
@@ -57,7 +57,7 @@ class PMSException(Exception):
             logger.debug(self.info)
 
 
-class AuthException(PMSException):
+class AuthException(CSRException):
     """
     Exception raised when Auth request fails
     """
@@ -93,7 +93,7 @@ def return_err_msg(code: str, msg: str = ''):
     return f'{msg or CODE_DESC.get(code)}'
 
 
-async def pms_exception_handler(request: Request, exc: PMSException):
+async def csr_exception_handler(request: Request, exc: CSRException):
     """
     pms exception handler
     :param request: Request instance
@@ -128,6 +128,6 @@ async def http_middleware(request: Request, call_next):
 
 
 exception_handlers = {
-    PMSException: pms_exception_handler,
+    CSRException: csr_exception_handler,
     AuthException: auth_exception_handler
 }
