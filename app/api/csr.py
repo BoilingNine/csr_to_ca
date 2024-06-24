@@ -149,12 +149,12 @@ async def check_csr(req: PassCSRReq, user: UserBase = Depends(get_user), db: Asy
             datetime.utcnow() + timedelta(days=365)
         ).add_extension(
             x509.SubjectAlternativeName([
-                x509.DNSName("mycompany.com"),
-                x509.DNSName("www.mycompany.com"),
+                x509.DNSName(f"{csr.dns_name}"),
+                x509.DNSName(f"www.{csr.dns_name}"),
             ]),
             critical=False,
         ).sign(private_key, hashes.SHA256())
-        # 将证书序列化为 PEM 格式
+        # 将证书序列化为 PEM 格式 上传到minio
         cert_pem = cert.public_bytes(serialization.Encoding.PEM)
         minio.upload_file(f"cert/{csr.user_id}/{file_name}", io.BytesIO(cert_pem),
                           len(cert_pem),
