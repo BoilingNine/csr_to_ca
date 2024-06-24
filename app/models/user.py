@@ -16,6 +16,7 @@ class User(DBBase):
     create_time = Column(DateTime, nullable=False, default=datetime.now, comment='创建时间')
     update_time = Column(DateTime, nullable=False, default=datetime.now, onupdate=datetime.now, comment='更新时间')
     deleted_time = Column(DateTime, nullable=True, onupdate=datetime.now, comment='删除时间')
+    rsa = Column(Boolean, nullable=False, default=False, comment="是否生成密钥对")
     roles = relationship('Role', uselist=True, back_populates='user')
     casbin_objects = relationship('CasbinObject', uselist=True, back_populates='user')
     casbin_actions = relationship('CasbinAction', uselist=True, back_populates='user')

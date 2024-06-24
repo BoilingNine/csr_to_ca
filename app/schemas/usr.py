@@ -13,7 +13,6 @@ class TokenRsp(BaseRsp):
     data: TokenBase = Field(..., title="Token信息", description="Token信息")
 
 
-
 class UserBase(BaseModel):
     id: int = Field(..., title="ID", description="用户ID")
     username: constr(strip_whitespace=True,
@@ -22,9 +21,11 @@ class UserBase(BaseModel):
     nickname: constr(strip_whitespace=True,
                      min_length=USER_NICKNAME_MIN,
                      max_length=USER_NICKNAME_MAX) = Field(..., title="用户昵称", description="用户昵称")
+    rsa: bool = Field(..., title="是否生成密钥对", description="是否生成密钥对")
 
     class Config:
         from_attributes = True
+
 
 class UserCreateReq(BaseModel):
     username: constr(strip_whitespace=True,
