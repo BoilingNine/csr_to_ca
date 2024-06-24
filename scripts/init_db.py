@@ -45,7 +45,7 @@ class TestDatabase:
 
         # 创建CasbinObject
         casbin_objects = [
-            CasbinObject(name='申请', object_key='Apply', description='Apply表--用户申请', user=user),
+            CasbinObject(name='申请', object_key='CSR', description='Apply表--用户申请', user=user),
         ]
         await add_casbin_objects(self.session, casbin_objects)
         # 设置管理员

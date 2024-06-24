@@ -19,7 +19,7 @@ router = APIRouter(
 
 
 @router.post('/register', summary="注册", response_model=BaseRsp)
-async def api_gen_rsa(user: UserCreateReq, db: AsyncSession = Depends(get_db)):
+async def api_register(user: UserCreateReq, db: AsyncSession = Depends(get_db)):
     user_db = await get_user_by_username(db, user.username)
     if user_db:
         raise CSRException(status.HTTP_403_FORBIDDEN, msg="用户名重复")
@@ -28,7 +28,7 @@ async def api_gen_rsa(user: UserCreateReq, db: AsyncSession = Depends(get_db)):
 
 
 @router.post('/login', summary="登录", response_model=TokenRsp)
-async def api_gen_rsa(form_data: Annotated[OAuth2PasswordRequestForm, Depends()], db: AsyncSession = Depends(get_db)):
+async def api_login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()], db: AsyncSession = Depends(get_db)):
     user = await authenticate_user(db, form_data.username, form_data.password)
     access_token = await gen_access_token(data={"user": user.username})
     return TokenRsp(data={"token": access_token})

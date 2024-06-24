@@ -6,7 +6,9 @@ from jose import jwt
 from passlib.context import CryptContext
 from fastapi import status
 
+from app.schemas.usr import UserBase
 from settings import JWT_SECRET_KEY, JWT_ALGORITHM
+from utils.casbin import get_casbin_e
 from utils.exceptions import AuthException
 from utils.fastapi.application import CSRHTTPBearer
 
@@ -63,4 +65,20 @@ async def verify_token(token: str):
     scheme, token = get_authorization_scheme_param(token)
     if scheme.lower() != "bearer":
         raise AuthException(status.HTTP_401_UNAUTHORIZED, msg="登陆状态已失效")
-    return jwt.decode(token, JWT_SECRET_KEY, algorithms=[JWT_ALGORITHM])
+    try:
+        payload = jwt.decode(token, JWT_SECRET_KEY, algorithms=[JWT_ALGORITHM])
+    except Exception as e:
+        raise AuthException(status.HTTP_401_UNAUTHORIZED, msg="登陆状态已失效")
+    return payload
+
+
+async def verify_enforce(user: UserBase, obj: str, act: str) -> bool:
+    """
+    verify enforce
+    :param user: UserBase object
+    :param obj: str
+    :param act: str
+    :return: bool
+    """
+    e = await get_casbin_e()
+    return e.enforce(user.username, obj, act)

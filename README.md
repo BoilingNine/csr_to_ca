@@ -1,6 +1,6 @@
 # 基于FastAPI的患者管理系统
 ## 介绍
-本系统是基于高性能FastAPI框架的放疗患者管理流转系统
+本系统是基于高性能FastAPI框架的csr_to_ca系统
 ## 软件架构
 FastAPI + MySQL 8.0 + MinIO
 ## platform

@@ -44,3 +44,18 @@ class EBase(Enum):
         for m in cls._value2member_map_.keys():
             ret.append(f'{m}:{cls.values.get(m)}')
         return f'{cls.__doc__}  {", ".join(ret)}'
+
+
+class EStatus(int, EBase):
+    """ csr 状态 """
+
+    @classmethod
+    def __init__(cls, *args):
+        super().__init__()
+        cls.values = {
+            1: '通过',
+            2: '拒绝',
+        }
+
+    passed = 1
+    refused = 2

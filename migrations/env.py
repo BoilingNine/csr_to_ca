@@ -5,7 +5,7 @@ from sqlalchemy import pool
 
 from alembic import context
 
-from app.models import user, role, casbin_rule, casbin_object, casbin_action, apply, csr
+from app.models import user, role, casbin_rule, casbin_object, casbin_action, csr
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -21,8 +21,7 @@ if config.config_file_name is not None:
 # from myapp import mymodel
 # target_metadata = models_admin.Base.metadata
 target_metadatas = [user.DBBase.metadata, role.DBBase.metadata, casbin_rule.DBBase.metadata,
-                    casbin_object.DBBase.metadata, casbin_action.DBBase.metadata, apply.DBBase.metadata,
-                    csr.DBBase.metadata]
+                    casbin_object.DBBase.metadata, casbin_action.DBBase.metadata, csr.DBBase.metadata]
 
 
 # other values from the config, defined by the needs of env.py,
