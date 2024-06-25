@@ -2,7 +2,7 @@
 ## 介绍
 本系统是基于高性能FastAPI框架的csr_to_ca系统
 ## 软件架构
-FastAPI + MySQL 8.0 + MinIO
+FastAPI
 ## platform
 Linux
 ## python env
@@ -32,15 +32,8 @@ pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
 uvicorn main:app_api 
 ```
 此时应用会在前台运行, 若需要后台运行则可使用 `screen` 或 `nohup` 命令.
-### Gunicorn 部署
-```bash
-# start
-./ca.sh start
-# stop
-./ca.sh stop
-# restart
-./ca.sh restart
-```
+### docker 部署
+
 
 ## 接口文档
 本系统支持swaggerUI，并且支持通过openapi.json在线导入到第三方工具，
