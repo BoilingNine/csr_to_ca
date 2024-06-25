@@ -33,6 +33,10 @@ uvicorn main:app_api
 ```
 此时应用会在前台运行, 若需要后台运行则可使用 `screen` 或 `nohup` 命令.
 ### docker 部署
+```bash
+docker build . -t csr_to_ca:0.0.1
+docker run csr_to_ca:0.0.1
+```
 
 
 ## 接口文档
