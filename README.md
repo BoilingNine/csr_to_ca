@@ -27,12 +27,6 @@ pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
 2. gunicorn.conf.py
 
 ## 部署
-### 迁移数据生成表
-```bash
-alembic init migrations # 初始化迁移文件，然后修改alembic.ini里面的数据库链接，数据库密码中含有@符号的需要将密码进行url编码，编码替换后用双百分号代替百分号
-alembic revision --autogenerate -m "init" # 创建一个新的版本文件，并写入本次迁移做了哪些修改。
-alembic upgrade head # 迁移最新的版本号
-```
 ### uvicorn 部署
 ```bash
 uvicorn main:app_api 

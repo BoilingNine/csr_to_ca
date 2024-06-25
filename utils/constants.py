@@ -1,8 +1,6 @@
 from enum import Enum
 from types import DynamicClassAttribute
 
-COMMON_ROLE_KEY = "common"
-
 USER_NAME_MIN = 1
 USER_NAME_MAX = 32
 USER_NICKNAME_MIN = 1
@@ -46,16 +44,3 @@ class EBase(Enum):
         return f'{cls.__doc__}  {", ".join(ret)}'
 
 
-class EStatus(int, EBase):
-    """ csr 状态 """
-
-    @classmethod
-    def __init__(cls, *args):
-        super().__init__()
-        cls.values = {
-            1: '通过',
-            2: '拒绝',
-        }
-
-    passed = 1
-    refused = 2

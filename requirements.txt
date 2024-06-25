@@ -1,14 +1,6 @@
 fastapi==0.111.0
 loguru==0.7.2
-SQLAlchemy==2.0.30
-aiomysql==0.2.0
-passlib==1.7.4
-python-jose==3.3.0
-alembic==1.13.1
-casbin==1.36.0
-casbin_async_sqlalchemy_adapter==1.5.0
 bcrypt==4.0.1
 cryptography==42.0.7
-minio==7.2.7
 gunicorn==22.0.0
 requests==2.32.1

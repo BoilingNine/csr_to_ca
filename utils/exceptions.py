@@ -6,7 +6,6 @@ from loguru import logger
 from fastapi import Request, status
 from fastapi.responses import JSONResponse
 
-from utils.database import SessionLocal
 from utils.ret_code import (CODE_DESC)
 
 
@@ -113,18 +112,13 @@ async def http_middleware(request: Request, call_next):
     :return: JSONResponse
     """
     try:
-        request.state.db = SessionLocal()
         return await call_next(request)
     except Exception as e:
-        await request.state.db.rollback()
         log_parameters(request)
         error = "".join(traceback.format_exception(e, limit=None, chain=True))
         logger.error(error)
         return JSONResponse({'code': status.HTTP_500_INTERNAL_SERVER_ERROR,
                              'msg': return_err_msg(status.HTTP_500_INTERNAL_SERVER_ERROR)})
-    finally:
-        await request.state.db.commit()
-        await request.state.db.close()
 
 
 exception_handlers = {
