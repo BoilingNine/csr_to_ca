@@ -1,4 +1,4 @@
-# 基于FastAPI的患者管理系统
+# 基于FastAPI的csr_to_ca系统
 ## 介绍
 本系统是基于高性能FastAPI框架的csr_to_ca系统
 ## 软件架构
