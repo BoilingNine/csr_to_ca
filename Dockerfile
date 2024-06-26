@@ -1,7 +1,5 @@
 FROM python:3.12-slim
-#FROM swr.cn-east-3.myhuaweicloud.com/tianjian/itjcloud-knowledge-graph-base:1
 
-# pms_admin version no
 LABEL version=0.0.1
 
 WORKDIR /var/app
