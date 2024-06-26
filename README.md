@@ -12,7 +12,10 @@ chmod 777 docker-start.sh
 docker build ./ -t csr_to_ca
 docker run -itd -p 127.0.0.1:8011:8011/tcp csr_to_ca:latest
 ```
-
+### 查看容器内生成的文件
+```bash
+docker exec -it 容器ID bash
+```
 
 ## 接口文档
 本系统支持swaggerUI，并且支持通过openapi.json在线导入到第三方工具，
