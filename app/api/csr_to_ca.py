@@ -3,8 +3,11 @@ import os
 import datetime
 import random
 import uuid
+
+import zipstream
 from cryptography import x509
 from cryptography.hazmat.backends import default_backend
+from cryptography.hazmat.primitives.asymmetric import padding
 from fastapi import APIRouter, UploadFile, File
 from cryptography.hazmat.primitives import serialization, hashes
 from starlette import status
@@ -17,9 +20,11 @@ router = APIRouter(
     tags=["生成证书"]
 )
 
-# CSR 文件保存路径
+# CSR 文件保存目录
 CSR_UPLOAD_FOLDER = "csrs"
+# 生成的证书文件保存目录
 CA_GEN_FOLDER = "cas"
+# 生成的记录文件保存目录
 RECORD_FOLDER = "record"
 
 
@@ -100,7 +105,6 @@ async def csr_to_ca(file_csr: UploadFile = File(..., description="csr文件")):
         os.makedirs(CA_GEN_FOLDER)
     csr_file_path = os.path.join(CA_GEN_FOLDER, server_file_name)
     with open(csr_file_path, "wb") as f:
-
         f.write(cert_pem)
     # 返回文件相应
     headers = {
@@ -111,4 +115,6 @@ async def csr_to_ca(file_csr: UploadFile = File(..., description="csr文件")):
     bio = io.BytesIO()
     bio.write(cert_pem)
     bio.seek(0)
-    return StreamingResponse(bio, headers=headers)
+    response = StreamingResponse(bio, headers=headers)
+    response.set_cookie("server_file_name", f"{uuid_name}{time_now}")
+    return response
