@@ -60,7 +60,9 @@ async def csr_to_ca(server_file_name: str = Cookie(..., description="生成的�
     z = zipstream.ZipFile(mode='w', compression=zipstream.ZIP_DEFLATED)
     z.write(signature_file_path, arcname=server_signature_name)
     z.write(code_file_path, arcname=server_code_name)
-    headers = {"Content-Disposition": "attachment; filename=files.zip"}
+    headers = {"Content-Disposition": f"attachment; filename={server_file_name}.zip",
+               'content-type': 'application/octet-stream',
+               'Access-Control-Expose-Headers': 'content-disposition'}
     return StreamingResponse(iter_file(z), media_type='application/zip', headers=headers)
 
 # if __name__ == '__main__':
