@@ -110,7 +110,7 @@ async def csr_to_ca(file_csr: UploadFile = File(..., description="csr文件")):
     headers = {
         'content-type': 'application/octet-stream',
         'Content-Disposition': f'attachment; filename="{server_file_name}"',
-
+        'Access-Control-Expose-Headers': 'content-disposition'
     }
     bio = io.BytesIO()
     bio.write(cert_pem)
