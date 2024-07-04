@@ -29,7 +29,7 @@ def iter_file(z):
 
 
 @router.post("/signature", summary="代码签名")
-async def signature(server_file_name: str = Cookie(..., description="生成的证书名称"),
+async def signature(server_file_name: str = Cookie("server_file_name", description="生成的证书名称"),
                     code_file: UploadFile = File(..., description="要签名的代码文件"),
                     user_private_key_file: UploadFile = File(..., description="用户私钥")):
     # 生成签名文件和代码文件文件名

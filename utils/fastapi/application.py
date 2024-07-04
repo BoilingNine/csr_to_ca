@@ -17,6 +17,11 @@ class CAFastAPI(FastAPI):
         self.openapi_schema = super().openapi()
         for _, method_item in self.openapi_schema.get('paths').items():
             for _, param in method_item.items():
+                # remove cookie参数显示，增加用户体验，使用户不需要填cookie的key值
+                parameters = param.get("parameters", [])
+                for parameter in parameters:
+                    if parameter.get("in") == "cookie":
+                        parameters.remove(parameter)
                 responses = param.get('responses')
                 # remove 422 response
                 if '422' in responses:
